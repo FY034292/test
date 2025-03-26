@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>シンプルメモアプリ</title>
+  <title>Todoアプリ</title>
   <style>
     body {
       font-family: sans-serif;
@@ -13,10 +13,11 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 600px;
       margin: 20px auto;
-      padding: 20px;
       background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
@@ -25,66 +26,133 @@
       margin-bottom: 20px;
     }
 
-    textarea {
-      width: 100%;
-      height: 300px;
+    #todo-form {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    #todo-input {
+      flex: 1;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
-      box-sizing: border-box; /* paddingを含めてwidth, heightに含める */
-      resize: vertical; /* 縦方向のみリサイズ可能 */
     }
 
-    .button-container {
-      text-align: right;
-      margin-top: 10px;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
+    #add-button {
       padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin-left: 10px;
     }
 
-    button:hover {
-      background-color: #3e8e41;
+    #todo-list {
+      list-style: none;
+      padding: 0;
     }
 
-    /* レスポンシブ対応 */
-    @media (max-width: 600px) {
+    .todo-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .todo-item:last-child {
+      border-bottom: none;
+    }
+
+    .todo-item input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    .todo-item span {
+      flex: 1;
+    }
+
+    .todo-item button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        color: #888;
+    }
+
+    @media (max-width: 768px) {
       .container {
         margin: 10px;
         padding: 10px;
+      }
+
+      #todo-form {
+        flex-direction: column;
+      }
+
+      #add-button {
+        margin-left: 0;
+        margin-top: 10px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>シンプルメモ</h1>
-    <textarea id="memoText" placeholder="ここにメモを入力してください"></textarea>
-    <div class="button-container">
-      <button onclick="saveMemo()">保存</button>
-    </div>
+    <h1>Todoリスト</h1>
+    <form id="todo-form">
+      <input type="text" id="todo-input" placeholder="新しいタスクを入力">
+      <button type="submit" id="add-button">追加</button>
+    </form>
+    <ul id="todo-list"></ul>
   </div>
 
   <script>
-    function saveMemo() {
-      const memoText = document.getElementById("memoText").value;
-      localStorage.setItem("memo", memoText);
-      alert("メモを保存しました！"); // 保存完了を通知
-    }
+    const todoForm = document.getElementById('todo-form');
+    const todoInput = document.getElementById('todo-input');
+    const todoList = document.getElementById('todo-list');
 
-    // ページロード時に保存されたメモを読み込む
-    window.onload = function() {
-      const savedMemo = localStorage.getItem("memo");
-      if (savedMemo) {
-        document.getElementById("memoText").value = savedMemo;
+    todoForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const taskText = todoInput.value.trim();
+
+      if (taskText !== '') {
+        addTodoItem(taskText);
+        todoInput.value = '';
       }
-    };
+    });
+
+    function addTodoItem(taskText) {
+      const listItem = document.createElement('li');
+      listItem.classList.add('todo-item');
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.addEventListener('change', function() {
+        listItem.querySelector('span').classList.toggle('completed');
+      });
+
+      const taskSpan = document.createElement('span');
+      taskSpan.textContent = taskText;
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = '削除';
+      deleteButton.addEventListener('click', function() {
+        listItem.remove();
+      });
+
+      listItem.appendChild(checkbox);
+      listItem.appendChild(taskSpan);
+      listItem.appendChild(deleteButton);
+
+      todoList.appendChild(listItem);
+    }
   </script>
 </body>
 </html>
