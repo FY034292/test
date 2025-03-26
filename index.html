@@ -9,8 +9,8 @@
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
         }
 
         .container {
@@ -18,7 +18,8 @@
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
@@ -35,7 +36,7 @@
         input[type="url"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
@@ -44,12 +45,11 @@
         button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            display: block;
-            margin: 10px auto;
+            font-size: 16px;
         }
 
         button:hover {
@@ -58,16 +58,18 @@
 
         #result {
             margin-top: 20px;
-            padding: 10px;
+            padding: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
             background-color: #f9f9f9;
-            white-space: pre-wrap;
+            white-space: pre-wrap; /* 改行を保持 */
+            word-wrap: break-word; /* 長い単語を折り返す */
         }
 
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
+                margin: 10px auto;
             }
         }
     </style>
@@ -77,12 +79,13 @@
         <h1>URLスクレイピングツール</h1>
         <label for="url">URLを入力してください:</label>
         <input type="url" id="url" name="url" placeholder="例: https://www.example.com">
-        <button onclick="scrapeText()">スクレイピング</button>
+        <button onclick="scrapeURL()">スクレイピング</button>
+
         <div id="result"></div>
     </div>
 
     <script>
-        async function scrapeText() {
+        async function scrapeURL() {
             const url = document.getElementById("url").value;
             const resultDiv = document.getElementById("result");
 
@@ -91,8 +94,10 @@
                 return;
             }
 
+            resultDiv.textContent = "スクレイピング中...";
+
             try {
-                const response = await fetch('/scrape', { // スクラップ処理を行うバックエンドエンドポイント
+                const response = await fetch('/scrape', { // サーバー側のエンドポイントにリクエストを送信
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -104,16 +109,19 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                const data = await response.json();
+                const data = await response.json(); //サーバーからJSON形式でデータを受け取る
 
-                if (data.error) {
-                    resultDiv.textContent = `エラー: ${data.error}`;
+                if (data.text) {
+                    resultDiv.textContent = data.text; // スクレイピングされたテキストを結果として表示
+                } else if (data.error) {
+                    resultDiv.textContent = `エラー: ${data.error}`; // エラーメッセージを表示
                 } else {
-                    resultDiv.textContent = data.text;
+                    resultDiv.textContent = "スクレイピングに失敗しました。";
                 }
+
             } catch (error) {
                 console.error("スクレイピングエラー:", error);
-                resultDiv.textContent = `スクレイピング中にエラーが発生しました: ${error}`;
+                resultDiv.textContent = `スクレイピングエラー: ${error.message}`;
             }
         }
     </script>
