@@ -1,129 +1,138 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URLスクレイピングツール</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f0f0f0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>電卓</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .calculator {
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .display {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 2em;
+      text-align: right;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      background-color: #eee;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 5px;
+    }
 
-        input[type="url"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+    button {
+      padding: 10px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 3px;
+      background-color: #ddd;
+      cursor: pointer;
+    }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+    button:hover {
+      background-color: #ccc;
+    }
 
-        button:hover {
-            background-color: #3e8e41;
-        }
+    button:active {
+      background-color: #bbb;
+    }
 
-        #result {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            white-space: pre-wrap; /* 改行を保持 */
-            word-wrap: break-word; /* 長い単語を折り返す */
-        }
+    .operator {
+      background-color: #e0e0e0;
+    }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-                margin: 10px auto;
-            }
-        }
-    </style>
+    .operator:hover {
+      background-color: #d0d0d0;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>URLスクレイピングツール</h1>
-        <label for="url">URLを入力してください:</label>
-        <input type="url" id="url" name="url" placeholder="例: https://www.example.com">
-        <button onclick="scrapeURL()">スクレイピング</button>
 
-        <div id="result"></div>
+  <div class="calculator">
+    <input type="text" class="display" id="display" value="0" readonly>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="backspace()">←</button>
+      <button onclick="appendDisplay('%')" class="operator">%</button>
+      <button onclick="appendDisplay('/')" class="operator">/</button>
+      <button onclick="appendDisplay('7')">7</button>
+      <button onclick="appendDisplay('8')">8</button>
+      <button onclick="appendDisplay('9')">9</button>
+      <button onclick="appendDisplay('*')" class="operator">*</button>
+      <button onclick="appendDisplay('4')">4</button>
+      <button onclick="appendDisplay('5')">5</button>
+      <button onclick="appendDisplay('6')">6</button>
+      <button onclick="appendDisplay('-')" class="operator">-</button>
+      <button onclick="appendDisplay('1')">1</button>
+      <button onclick="appendDisplay('2')">2</button>
+      <button onclick="appendDisplay('3')">3</button>
+      <button onclick="appendDisplay('+')" class="operator">+</button>
+      <button onclick="appendDisplay('0')">0</button>
+      <button onclick="appendDisplay('.')">.</button>
+      <button onclick="calculate()" class="operator">=</button>
     </div>
+  </div>
 
-    <script>
-        async function scrapeURL() {
-            const url = document.getElementById("url").value;
-            const resultDiv = document.getElementById("result");
+  <script>
+    let displayValue = '0';
 
-            if (!url) {
-                resultDiv.textContent = "URLを入力してください。";
-                return;
-            }
+    function updateDisplay() {
+      document.getElementById('display').value = displayValue;
+    }
 
-            resultDiv.textContent = "スクレイピング中...";
+    function appendDisplay(value) {
+      if (displayValue === '0') {
+        displayValue = value;
+      } else {
+        displayValue += value;
+      }
+      updateDisplay();
+    }
 
-            try {
-                const response = await fetch('/scrape', { // サーバー側のエンドポイントにリクエストを送信
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ url: url })
-                });
+    function clearDisplay() {
+      displayValue = '0';
+      updateDisplay();
+    }
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json(); //サーバーからJSON形式でデータを受け取る
-
-                if (data.text) {
-                    resultDiv.textContent = data.text; // スクレイピングされたテキストを結果として表示
-                } else if (data.error) {
-                    resultDiv.textContent = `エラー: ${data.error}`; // エラーメッセージを表示
-                } else {
-                    resultDiv.textContent = "スクレイピングに失敗しました。";
-                }
-
-            } catch (error) {
-                console.error("スクレイピングエラー:", error);
-                resultDiv.textContent = `スクレイピングエラー: ${error.message}`;
-            }
+    function backspace() {
+        displayValue = displayValue.slice(0, -1);
+        if (displayValue === '') {
+            displayValue = '0';
         }
-    </script>
+        updateDisplay();
+    }
+
+    function calculate() {
+      try {
+        displayValue = eval(displayValue);
+        updateDisplay();
+      } catch (error) {
+        displayValue = 'エラー';
+        updateDisplay();
+      }
+    }
+
+    updateDisplay(); // 初期表示
+  </script>
 </body>
 </html>
