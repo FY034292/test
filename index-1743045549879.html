@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最高の住まい探しをサポート | 株式会社〇〇不動産</title>
+    <style>
+        /* CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        /* General Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            padding: 40px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .heading {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('https://placehold.jp/1920x1080/cccccc/ffffff?text=不動産イメージ');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .testimonial-author {
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-form label {
+            margin-bottom: 5px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-links a {
+            color: #fff;
+            margin: 0 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+    <!-- Navigation (省略) -->
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">理想の住まいを、あなたに。</h1>
+            <h2 class="hero-subtitle">経験豊富なプロが、最適な物件探しをサポートします。</h2>
+            <a href="#contact" class="btn">無料相談はこちら</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="heading">私たちの強み</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="feature-icon"></i>
+                    <h3 class="feature-title">豊富な物件情報</h3>
+                    <p>未公開物件を含む、幅広い選択肢をご用意しています。</p>
+                </div>
+                <div class="feature">
+                    <i class="feature-icon"></i>
+                    <h3 class="feature-title">専門家によるサポート</h3>
+                    <p>不動産のプロが、お客様のニーズに合わせた物件をご提案。</p>
+                </div>
+                <div class="feature">
+                    <i class="feature-icon"></i>
+                    <h3 class="feature-title">安心・安全な取引</h3>
+                    <p>法務・税務の専門家と連携し、安心の取引をサポートします。</p>
+                </div>
+                  <div class="feature">
+                    <i class="feature-icon"></i>
+                    <h3 class="feature-title">地域密着型サービス</h3>
+                    <p>〇〇地域に特化した情報提供で、最適な住まい探しをお手伝いします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="heading">お客様の声</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>"丁寧な対応で、希望通りの物件を見つけることができました。ありがとうございました！"</p>
+                    <p class="testimonial-author">- A様</p>
+                </div>
+                <div class="testimonial">
+                    <p>"初めての不動産購入で不安でしたが、親身に相談に乗っていただき助かりました。"</p>
+                    <p class="testimonial-author">- B様</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="heading">よくあるご質問</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">Q. 仲介手数料はいくらですか？</div>
+                    <div class="faq-answer">A. 仲介手数料は、物件価格に応じて異なります。詳しくはお問い合わせください。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 内覧は可能ですか？</div>
+                    <div class="faq-answer">A. はい、可能です。ご希望の日時をお知らせください。</div>
+                </div>
+                 <div class="faq-item">
+                    <div class="faq-question">Q. ローンの相談はできますか？</div>
+                    <div class="faq-answer">A. 提携金融機関をご紹介し、お客様に最適なローンをご提案します。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="heading">お問い合わせ</h2>
+            <form class="contact-form">
+                <label for="name">お名前:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">メールアドレス:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">お問い合わせ内容:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">送信</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 株式会社〇〇不動産</p>
+            <div class="footer-links">
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">利用規約</a>
+                <a href="#">お問い合わせ</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
