@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>最強のフィットネスジム | あなたの理想の体へ</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          line-height: 1.6;
+        }
+
+        header {
+          background-color: #333;
+          color: white;
+          padding: 1rem;
+          text-align: center;
+        }
+
+        .hero {
+          background-image: url("https://drive.google.com/thumbnail?id=1T1h1ao1lK9FXf7j4foP_0EEOTCigxmoR&sz=w1000");
+          background-size: cover;
+          background-position: center;
+          color: white;
+          text-align: center;
+          padding: 5rem 2rem;
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .features {
+          padding: 3rem 2rem;
+          text-align: center;
+        }
+
+        .features h2 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .feature {
+          margin-bottom: 2rem;
+        }
+
+        .social-proof {
+          background-color: #f4f4f4;
+          padding: 3rem 2rem;
+          text-align: center;
+        }
+
+        .social-proof h2 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .testimonial {
+          margin-bottom: 2rem;
+        }
+
+        .faq {
+          padding: 3rem 2rem;
+          text-align: center;
+        }
+
+        .faq h2 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .question {
+          margin-bottom: 1rem;
+        }
+
+        .contact {
+          padding: 3rem 2rem;
+          text-align: center;
+        }
+
+        .contact h2 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .contact form {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .contact form label {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .contact form input,
+        .contact form textarea {
+          width: 100%;
+          padding: 0.5rem;
+          margin-bottom: 1rem;
+          border: 1px solid #ccc;
+        }
+
+        footer {
+          background-color: #333;
+          color: white;
+          text-align: center;
+          padding: 1rem;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+          .hero h1 {
+            font-size: 2rem;
+          }
+
+          .hero p {
+            font-size: 1rem;
+          }
+        }
+      </style>
+    </head>
+    <body>
+
+      <header>
+        <h1>最強のフィットネスジム</h1>
+      </header>
+
+      <section class="hero">
+        <h1>あなたの理想の体へ、私たちにお任せください</h1>
+        <p>経験豊富なトレーナー陣と最新設備で、あなたのフィットネス目標達成を全力でサポートします。</p>
+      </section>
+
+      <section class="features">
+        <h2>私たちの強み</h2>
+        <div class="feature">
+          <h3>パーソナライズされたトレーニング</h3>
+          <p>あなたの目標とレベルに合わせた、最適なトレーニングプランを作成します。</p>
+        </div>
+        <div class="feature">
+          <h3>最新の設備</h3>
+          <p>最新のマシンと充実した施設で、効果的なトレーニングをサポートします。</p>
+        </div>
+        <div class="feature">
+          <h3>経験豊富なトレーナー</h3>
+          <p>資格を持ったプロのトレーナーが、あなたの成長を丁寧に指導します。</p>
+        </div>
+      </section>
+
+      <section class="social-proof">
+        <h2>お客様の声</h2>
+        <div class="testimonial">
+          <p>"トレーニングを始めて3ヶ月で、体重が5kg減りました！トレーナーの指導も丁寧で、楽しく続けられています。"</p>
+          <p>- Aさん</p>
+        </div>
+        <div class="testimonial">
+          <p>"以前は運動が苦手でしたが、ここのジムに通うようになってから、運動が好きになりました。設備も綺麗で、とても快適です。"</p>
+          <p>- Bさん</p>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>よくある質問</h2>
+        <div class="question">
+          <h3>初心者でも大丈夫ですか？</h3>
+          <p>はい、初心者の方でも安心してご利用いただけます。トレーナーが丁寧に指導しますので、ご安心ください。</p>
+        </div>
+        <div class="question">
+          <h3>体験トレーニングはできますか？</h3>
+          <p>はい、無料で体験トレーニングをご利用いただけます。お気軽にお問い合わせください。</p>
+        </div>
+      </section>
+
+      <section class="contact">
+        <h2>お問い合わせ</h2>
+        <p>ご質問やご予約は、お気軽にお問い合わせください。</p>
+        <form action="#" method="post">
+          <label for="name">お名前:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">メールアドレス:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">お問い合わせ内容:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit">送信</button>
+        </form>
+        <img src="https://drive.google.com/thumbnail?id=1shzgfRwVW9vVmxto3Qiavgio_Ho3EVkd&sz=w1000" alt="カフェの様子">
+      </section>
+
+      <footer>
+        <p>&copy; 2023 最強のフィットネスジム | <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+      </footer>
+
+    </body>
