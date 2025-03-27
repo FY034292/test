@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>こだわりのコーヒーとくつろぎの空間｜カフェ [カフェ名]</title>
+      <style>
+        body {
+          font-family: 'Noto Sans JP', sans-serif;
+          margin: 0;
+          padding: 0;
+          line-height: 1.6;
+          color: #333;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        header {
+          background-color: #f8f8f8;
+          padding: 20px 0;
+          text-align: center;
+        }
+
+        h1, h2, h3 {
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        .hero {
+          background-image: url('https://drive.google.com/file/d/1xxoTsSXEtpB5Ld5ZuAeAPFRd305RiaUh/view?usp=drivesdk');
+          background-size: cover;
+          background-position: center;
+          color: #fff;
+          text-align: center;
+          padding: 100px 0;
+          margin-bottom: 50px;
+        }
+
+        .hero h1 {
+          font-size: 3em;
+          margin-bottom: 20px;
+        }
+
+        .hero p {
+          font-size: 1.2em;
+          margin-bottom: 30px;
+        }
+
+        .btn {
+          display: inline-block;
+          background-color: #a37a56;
+          color: #fff;
+          padding: 15px 30px;
+          text-decoration: none;
+          border-radius: 5px;
+          font-weight: bold;
+        }
+
+        .features {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          margin-bottom: 50px;
+        }
+
+        .feature {
+          width: 30%;
+          padding: 20px;
+          text-align: center;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+
+        .testimonials {
+          background-color: #f8f8f8;
+          padding: 50px 0;
+          text-align: center;
+          margin-bottom: 50px;
+        }
+
+        .testimonial {
+          margin-bottom: 20px;
+        }
+
+        .faq {
+          margin-bottom: 50px;
+        }
+
+        .faq h3 {
+          margin-top: 20px;
+        }
+
+        .cta {
+          text-align: center;
+          margin-bottom: 50px;
+        }
+
+        form {
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        input, textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+
+        footer {
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          padding: 20px 0;
+        }
+      </style>
+    </head>
+    <body>
+
+      <header>
+        <h1>[カフェ名]</h1>
+      </header>
+
+      <section class="hero">
+        <div class="container">
+          <h1>極上のコーヒーと、心安らぐ空間を。</h1>
+          <p>一杯のコーヒーから生まれる、豊かな時間をお過ごしください。</p>
+          <a href="#menu" class="btn">メニューを見る</a>
+        </div>
+      </section>
+
+      <section class="features container">
+        <div class="feature">
+          <h3>厳選された豆</h3>
+          <p>世界各地から厳選された高品質なコーヒー豆を使用しています。</p>
+        </div>
+        <div class="feature">
+          <h3>熟練のバリスタ</h3>
+          <p>経験豊富なバリスタが、一杯一杯丁寧に抽出します。</p>
+        </div>
+        <div class="feature">
+          <h3>くつろぎの空間</h3>
+          <p>ゆったりと過ごせる、落ち着いた雰囲気の店内です。</p>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <div class="container">
+          <h2>お客様の声</h2>
+          <div class="testimonial">
+            <p>"コーヒーの香りが最高！読書をしながらゆっくり過ごせました。" - A.T.</p>
+          </div>
+          <div class="testimonial">
+            <p>"落ち着いた雰囲気で、仕事の打ち合わせにも最適です。" - K.S.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq container">
+        <h2>よくある質問</h2>
+        <h3>営業時間は？</h3>
+        <p>午前8時から午後8時までです。</p>
+        <h3>Wi-Fiはありますか？</h3>
+        <p>はい、無料でご利用いただけます。</p>
+        <h3>予約はできますか？</h3>
+        <p>はい、お電話またはオンラインでご予約いただけます。</p>
+      </section>
+
+      <section class="cta container">
+        <h2>お問い合わせはこちら</h2>
+        <p>ご質問やご要望がございましたら、お気軽にお問い合わせください。</p>
+        <form action="#" method="post">
+          <label for="name">お名前</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">お問い合わせ内容</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <button type="submit" class="btn">送信</button>
+        </form>
+      </section>
+
+      <section class="image-section container">
+        <img src="https://drive.google.com/file/d/1BpKMp6m1abyYWYppmqPzKn6XheOqe3wP/view?usp=drivesdk" alt="カフェの店内">
+      </section>
+
+      <footer>
+        <div class="container">
+          <p>&copy; 2023 [カフェ名]. All rights reserved.</p>
+          <p>連絡先: [電話番号] | [メールアドレス]</p>
+          <p>SNS: [SNSリンク]</p>
+        </div>
+      </footer>
+
+    </body>
