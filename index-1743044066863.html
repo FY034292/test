@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ポップアート</title>
+<style>
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #e91e63; /* Magenta */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.gallery-item {
+  width: calc(50% - 20px); /* 2 columns on larger screens */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.gallery-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border: 5px solid #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.1);
+}
+
+.gallery-item h2 {
+  margin-top: 10px;
+  color: #2196f3; /* Blue */
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .gallery-item {
+    width: 100%; /* 1 column on smaller screens */
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>ポップアートの世界</h1>
+  <p>ポップアートは、1950年代にイギリスとアメリカで誕生した美術運動です。大量生産や大衆文化に目を向け、身近なモチーフを大胆な色彩やイメージで表現します。アンディ・ウォーホルやロイ・リキテンスタインなどが代表的なアーティストとして知られています。</p>
+
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="https://via.placeholder.com/300/f44336/ffffff?text=Pop+Art+1" alt="ポップアート画像1">
+      <h2>作品1</h2>
+      <p>鮮やかな赤色を基調とした作品です。日常的なモチーフを大胆に表現しています。</p>
+    </div>
+    <div class="gallery-item">
+      <img src="https://via.placeholder.com/300/2196f3/ffffff?text=Pop+Art+2" alt="ポップアート画像2">
+      <h2>作品2</h2>
+      <p>青色を効果的に使用し、コミックのような表現を取り入れています。</p>
+    </div>
+    <div class="gallery-item">
+      <img src="https://via.placeholder.com/300/4caf50/ffffff?text=Pop+Art+3" alt="ポップアート画像3">
+      <h2>作品3</h2>
+      <p>緑色をメインカラーに、ポップなパターンが印象的な作品です。</p>
+    </div>
+    <div class="gallery-item">
+      <img src="https://via.placeholder.com/300/ff9800/ffffff?text=Pop+Art+4" alt="ポップアート画像4">
+      <h2>作品4</h2>
+      <p>オレンジ色を基調とし、エネルギーを感じさせる作品です。</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
