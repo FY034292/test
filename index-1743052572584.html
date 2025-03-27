@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>最高の住まい探しをサポート | [あなたの不動産会社名]</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          line-height: 1.6;
+          color: #333;
+        }
+
+        header, section, footer {
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+
+        header {
+          background-color: #f0f0f0;
+          text-align: center;
+        }
+
+        .hero-section {
+          text-align: center;
+        }
+
+        .hero-section img {
+          width: 100%;
+          max-height: 500px;
+          object-fit: cover;
+          margin-bottom: 20px;
+        }
+
+        .features-section {
+          background-color: #fff;
+        }
+
+        .feature {
+          margin-bottom: 20px;
+        }
+
+        .feature h3 {
+          color: #007bff;
+        }
+
+        .testimonials-section {
+          background-color: #f9f9f9;
+        }
+
+        .testimonial {
+          margin-bottom: 20px;
+          border: 1px solid #ddd;
+          padding: 15px;
+        }
+
+        .faq-section {
+          background-color: #fff;
+        }
+
+        .faq-item {
+          margin-bottom: 15px;
+        }
+
+        .faq-item h4 {
+          cursor: pointer;
+        }
+
+        .faq-answer {
+          display: none;
+        }
+
+        .contact-form-section {
+          background-color: #f0f0f0;
+        }
+
+        .contact-form {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .contact-form label {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        .contact-form input, .contact-form textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        .contact-form button {
+          background-color: #007bff;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        footer {
+          background-color: #333;
+          color: white;
+          text-align: center;
+        }
+
+        footer a {
+          color: white;
+          margin: 0 10px;
+          text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+          header, section, footer {
+            padding: 10px;
+            margin-bottom: 10px;
+          }
+        }
+      </style>
+    </head>
+    <body>
+
+      <header>
+        <h1>[あなたの不動産会社名]</h1>
+        <p>最高の物件を見つけましょう</p>
+      </header>
+
+      <section class="hero-section">
+        <img src="https://drive.google.com/thumbnail?id=1goIpG17BIGFn9UVvESEIQILqiVUeHcU_&sz=w1000" alt="物件のイメージ">
+        <!-- 画像の上にテキストは重ねない -->
+      </section>
+
+      <section class="features-section">
+        <h2>サービスの特徴</h2>
+        <div class="feature">
+          <h3>豊富な物件情報</h3>
+          <p>幅広い種類の物件を掲載しています。あなたの理想の住まいがきっと見つかります。</p>
+        </div>
+        <div class="feature">
+          <h3>専門家によるサポート</h3>
+          <p>経験豊富なスタッフが、物件探しから契約まで丁寧にサポートいたします。</p>
+        </div>
+        <div class="feature">
+          <h3>オンライン相談</h3>
+          <p>ご自宅からでも、お気軽にご相談いただけます。</p>
+        </div>
+      </section>
+
+      <section class="testimonials-section">
+        <h2>お客様の声</h2>
+        <div class="testimonial">
+          <p>"[あなたの不動産会社名]のおかげで、理想の家を見つけることができました。親切な対応に感謝しています！"</p>
+          <p>- A.T.様</p>
+        </div>
+        <div class="testimonial">
+          <p>"初めての家探しで不安でしたが、丁寧な説明で安心して進めることができました。"</p>
+          <p>- K.S.様</p>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <h2>よくある質問</h2>
+        <div class="faq-item">
+          <h4 onclick="toggleAnswer('faq1')">物件探しで注意すべき点は？</h4>
+          <div class="faq-answer" id="faq1">
+            <p>ご自身のライフスタイルや予算を考慮し、立地や間取りなどを重視することが大切です。</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h4 onclick="toggleAnswer('faq2')">契約に必要な書類は？</h4>
+          <div class="faq-answer" id="faq2">
+            <p>身分証明書、住民票、収入証明書などが必要になります。詳しくは担当者にお問い合わせください。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-form-section">
+        <h2>お問い合わせ</h2>
+        <form class="contact-form">
+          <label for="name">お名前:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">メールアドレス:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">お問い合わせ内容:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit">送信</button>
+        </form>
+      </section>
+
+      <footer>
+        <p>© 2023 [あなたの不動産会社名]</p>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+      </footer>
+
+      <script>
+        function toggleAnswer(id) {
+          var answer = document.getElementById(id);
+          if (answer.style.display === "block") {
+            answer.style.display = "none";
+          } else {
+            answer.style.display = "block";
+          }
+        }
+      </script>
+
+    </body>
