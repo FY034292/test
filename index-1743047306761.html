@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>あなたのフィットネスを新たな高みへ - [ジム名]</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          line-height: 1.6;
+          color: #333;
+        }
+
+        header, footer {
+          background-color: #222;
+          color: #fff;
+          text-align: center;
+          padding: 20px;
+        }
+
+        header h1 {
+          margin: 0;
+        }
+
+        section {
+          padding: 40px;
+          text-align: center;
+        }
+
+        .hero {
+          background-image: url(https://drive.google.com/uc?id=1gs75eTlQEvWu5sdGPR9GuRk1IBvowYFl&export=download);
+          background-size: cover;
+          background-position: center;
+          color: #fff;
+          padding: 100px 40px;
+          text-align: center;
+        }
+
+        .hero h1 {
+          font-size: 3em;
+          margin-bottom: 10px;
+        }
+
+        .hero p {
+          font-size: 1.2em;
+          margin-bottom: 30px;
+        }
+
+        .btn {
+          display: inline-block;
+          background-color: #e44d26;
+          color: #fff;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 5px;
+        }
+
+        .features {
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+        }
+
+        .feature {
+          width: 30%;
+          margin-bottom: 20px;
+        }
+
+        .testimonials {
+          background-color: #f4f4f4;
+        }
+
+        .testimonial {
+          margin-bottom: 20px;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        .faq {
+          text-align: left;
+        }
+
+        .faq h3 {
+          margin-bottom: 5px;
+        }
+
+        .contact-form {
+          text-align: left;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .contact-form label {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+          .features {
+            flex-direction: column;
+          }
+
+          .feature {
+            width: 100%;
+          }
+        }
+      </style>
+    </head>
+    <body>
+
+      <header>
+        <h1>[ジム名]</h1>
+      </header>
+
+      <section class="hero">
+        <h1>あなたのフィットネスを新たな高みへ</h1>
+        <p>専門トレーナーと最新設備で、あなたの目標達成をサポートします。</p>
+        <a href="#contact" class="btn">無料体験を申し込む</a>
+      </section>
+
+      <section class="features">
+        <div class="feature">
+          <img src="https://drive.google.com/uc?id=1jVlF5O72mr2QSZqjZ80RwUE5wD_m2ahL&export=download" alt="パーソナルトレーニング" width="200">
+          <h3>パーソナルトレーニング</h3>
+          <p>あなただけのトレーニングメニューで、効率的に目標を達成。</p>
+        </div>
+        <div class="feature">
+          <h3>最新設備</h3>
+          <p>充実した最新設備で、快適なトレーニング環境をご提供。</p>
+        </div>
+        <div class="feature">
+          <h3>豊富なプログラム</h3>
+          <p>ヨガ、ピラティス、格闘技など、多彩なプログラムをご用意。</p>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <h2>お客様の声</h2>
+        <div class="testimonial">
+          <p>"[ジム名]に通い始めてから、体力がつき、自信が持てるようになりました。トレーナーの方も親切で、楽しくトレーニングできています！"</p>
+          <p>- [お客様の名前]</p>
+        </div>
+        <div class="testimonial">
+          <p>"以前は運動が苦手でしたが、[ジム名]のプログラムは初心者でも無理なく続けられます。目標だった体重を達成できました！"</p>
+          <p>- [お客様の名前]</p>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>よくある質問</h2>
+        <div class="faq-item">
+          <h3>Q: 初心者でも大丈夫ですか？</h3>
+          <p>A: はい、初心者の方でも安心してご利用いただけます。トレーナーが丁寧に指導いたします。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: どんな服装でトレーニングすれば良いですか？</h3>
+          <p>A: 動きやすい服装であれば問題ありません。トレーニングウェアとシューズをご用意ください。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 見学はできますか？</h3>
+          <p>A: はい、いつでも見学可能です。お気軽にお越しください。</p>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>お問い合わせ</h2>
+        <p>無料体験や入会に関するお問い合わせはこちらから。</p>
+        <form class="contact-form">
+          <label for="name">お名前:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">メールアドレス:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">お問い合わせ内容:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit" class="btn">送信</button>
+        </form>
+      </section>
+
+      <footer>
+        <p>&copy; 2023 [ジム名]. All rights reserved.</p>
+        <p>連絡先: info@[ジム名].com</p>
+        <p>SNS: [SNSリンク]</p>
+      </footer>
+
+    </body>
