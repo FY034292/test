@@ -1,77 +1,392 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello, World!</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tetris</title>
+<style>
+body {
+    background-color: #333;
+    color: #fff;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tetris-board {
+    display: grid;
+    grid-template-columns: repeat(10, 20px); /* Adjust for responsiveness */
+    grid-template-rows: repeat(20, 20px); /* Adjust for responsiveness */
+    border: 2px solid #fff;
+    background-color: #000;
+    margin-bottom: 20px;
+}
+
+.grid-cell {
+    width: 20px; /* Adjust for responsiveness */
+    height: 20px; /* Adjust for responsiveness */
+    box-sizing: border-box;
+    border: 1px solid #444;
+}
+
+.grid-cell.occupied {
+    background-color: blue; /* Default color, will be overwritten by JS */
+}
+
+#score {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#level {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#controls {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #367c39;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #tetris-board {
+        grid-template-columns: repeat(10, 15px);
+        grid-template-rows: repeat(20, 15px);
     }
 
-    .container {
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .grid-cell {
+        width: 15px;
+        height: 15px;
     }
 
-    h1 {
-      color: #333;
-      font-size: 2em;
-    }
-
-    p {
-      color: #666;
-      font-size: 1.2em;
-      margin-top: 10px;
+    #score, #level {
+        font-size: 16px;
     }
 
     button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1em;
+        padding: 8px 16px;
+        font-size: 14px;
     }
+}
+</style>
 
-    button:hover {
-      background-color: #3e8e41;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.5em;
-      }
-
-      p {
-        font-size: 1em;
-      }
-    }
-  </style>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 </head>
 <body>
-  <div class="container">
-    <h1>Hello, World!</h1>
-    <p>This is a simple HTML page.</p>
-    <button onclick="showAlert()">Say Hello</button>
-  </div>
+<!-- このページは 2025-03-27T02:29:19.322Z に生成されました。表示時刻と異なる場合はキャッシュされています。 -->
 
-  <script>
-    function showAlert() {
-      alert("Hello from JavaScript!");
+
+<div id="game-container">
+    <div id="score">Score: 0</div>
+    <div id="level">Level: 1</div>
+    <div id="tetris-board"></div>
+    <div id="controls">
+        <button id="start-button">Start</button>
+        <button id="pause-button">Pause</button>
+    </div>
+</div>
+
+<script>
+const boardWidth = 10;
+const boardHeight = 20;
+let board = [];
+let score = 0;
+let level = 1;
+let gameInterval;
+let isPaused = false;
+
+const boardElement = document.getElementById('tetris-board');
+const scoreElement = document.getElementById('score');
+const levelElement = document.getElementById('level');
+const startButton = document.getElementById('start-button');
+const pauseButton = document.getElementById('pause-button');
+
+// Tetromino shapes (I, J, L, O, S, T, Z)
+const tetrominos = [
+    [[1, 1, 1, 1]], // I
+    [[1, 0, 0], [1, 1, 1]], // J
+    [[0, 0, 1], [1, 1, 1]], // L
+    [[1, 1], [1, 1]], // O
+    [[0, 1, 1], [1, 1, 0]], // S
+    [[0, 1, 0], [1, 1, 1]], // T
+    [[1, 1, 0], [0, 1, 1]]  // Z
+];
+
+let currentTetromino = null;
+let currentTetrominoPosition = { x: 0, y: 0 };
+let currentTetrominoRotation = 0;
+
+// Function to initialize the game board
+function initializeBoard() {
+    board = Array(boardHeight).fill(null).map(() => Array(boardWidth).fill(0));
+    boardElement.innerHTML = ''; // Clear the board
+
+    for (let row = 0; row < boardHeight; row++) {
+        for (let col = 0; col < boardWidth; col++) {
+            const cell = document.createElement('div');
+            cell.classList.add('grid-cell');
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+            boardElement.appendChild(cell);
+        }
     }
-  </script>
+}
+
+// Function to draw the board
+function drawBoard() {
+    for (let row = 0; row < boardHeight; row++) {
+        for (let col = 0; col < boardWidth; col++) {
+            const cell = document.querySelector(`.grid-cell[data-row="${row}"][data-col="${col}"]`);
+            cell.classList.remove('occupied');
+            cell.style.backgroundColor = ''; // Reset color
+
+            if (board[row][col] !== 0) {
+                cell.classList.add('occupied');
+                cell.style.backgroundColor = board[row][col];
+            }
+        }
+    }
+}
+
+// Function to generate a random tetromino
+function getRandomTetromino() {
+    const randomIndex = Math.floor(Math.random() * tetrominos.length);
+    return {
+        shape: tetrominos[randomIndex],
+        color: ['red', 'green', 'yellow', 'cyan', 'magenta', 'orange', 'purple'][randomIndex]
+    };
+}
+
+// Function to spawn a new tetromino
+function spawnTetromino() {
+    currentTetromino = getRandomTetromino();
+    currentTetrominoPosition = { x: Math.floor(boardWidth / 2) - Math.floor(currentTetromino.shape[0].length / 2), y: 0 };
+    currentTetrominoRotation = 0;
+
+    if (!isValidMove(currentTetromino.shape, currentTetrominoPosition.x, currentTetrominoPosition.y)) {
+        // Game Over
+        clearInterval(gameInterval);
+        alert("Game Over!");
+    }
+}
+
+// Function to rotate a tetromino
+function rotateTetromino(tetromino) {
+    const rows = tetromino.length;
+    const cols = tetromino[0].length;
+    const rotatedTetromino = Array(cols).fill(null).map(() => Array(rows).fill(0));
+
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            rotatedTetromino[j][rows - 1 - i] = tetromino[i][j];
+        }
+    }
+
+    return rotatedTetromino;
+}
+
+
+// Function to check if a move is valid
+function isValidMove(tetromino, x, y, rotation = currentTetrominoRotation) {
+    const rotatedTetromino = rotateTetromino(tetromino);
+
+    for (let row = 0; row < rotatedTetromino.length; row++) {
+        for (let col = 0; col < rotatedTetromino[row].length; col++) {
+            if (rotatedTetromino[row][col] !== 0) {
+                const boardX = x + col;
+                const boardY = y + row;
+
+                if (boardX < 0 || boardX >= boardWidth || boardY >= boardHeight) {
+                    return false;
+                }
+                if (boardY < 0) continue; // Ignore checks above the board.
+
+                if (board[boardY][boardX] !== 0) {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+// Function to move the tetromino down
+function moveTetrominoDown() {
+    if (!currentTetromino) return;
+
+    if (isValidMove(currentTetromino.shape, currentTetrominoPosition.x, currentTetrominoPosition.y + 1)) {
+        currentTetrominoPosition.y++;
+    } else {
+        // Lock the tetromino in place
+        lockTetromino();
+        clearLines();
+        spawnTetromino();
+    }
+}
+
+// Function to lock the tetromino in place
+function lockTetromino() {
+    const rotatedTetromino = rotateTetromino(currentTetromino.shape);
+
+    for (let row = 0; row < rotatedTetromino.length; row++) {
+        for (let col = 0; col < rotatedTetromino[row].length; col++) {
+            if (rotatedTetromino[row][col] !== 0) {
+                const boardX = currentTetrominoPosition.x + col;
+                const boardY = currentTetrominoPosition.y + row;
+                board[boardY][boardX] = currentTetromino.color;
+            }
+        }
+    }
+}
+
+// Function to clear completed lines
+function clearLines() {
+    let linesCleared = 0;
+
+    for (let row = boardHeight - 1; row >= 0; row--) {
+        if (board[row].every(cell => cell !== 0)) {
+            // Clear the line
+            board.splice(row, 1);
+            board.unshift(Array(boardWidth).fill(0)); // Add a new empty line at the top
+            linesCleared++;
+        }
+    }
+
+    if (linesCleared > 0) {
+        score += linesCleared * 100 * level;
+        scoreElement.textContent = `Score: ${score}`;
+        // Increase level every 5 lines cleared
+        if (score >= level * 500) {
+            level++;
+            levelElement.textContent = `Level: ${level}`;
+            clearInterval(gameInterval);
+            gameInterval = setInterval(moveTetrominoDown, 1000 / level);
+        }
+    }
+}
+
+
+// Function to draw the current tetromino
+function drawCurrentTetromino() {
+    const rotatedTetromino = rotateTetromino(currentTetromino.shape);
+
+    for (let row = 0; row < rotatedTetromino.length; row++) {
+        for (let col = 0; col < rotatedTetromino[row].length; col++) {
+            if (rotatedTetromino[row][col] !== 0) {
+                const boardX = currentTetrominoPosition.x + col;
+                const boardY = currentTetrominoPosition.y + row;
+
+                if (boardY >= 0 && boardY < boardHeight && boardX >= 0 && boardX < boardWidth) { // Ensure within board bounds
+                  const cell = document.querySelector(`.grid-cell[data-row="${boardY}"][data-col="${boardX}"]`);
+                  cell.classList.add('occupied');
+                  cell.style.backgroundColor = currentTetromino.color;
+                }
+            }
+        }
+    }
+}
+
+
+// Main game loop
+function gameLoop() {
+    if(isPaused) return;
+
+    // Clear the previous tetromino from the board
+    drawBoard();
+
+    // Move the tetromino down
+    moveTetrominoDown();
+
+    // Draw the current tetromino
+    drawCurrentTetromino();
+
+    // Update the board display
+    drawBoard();
+}
+
+
+// Keydown event listener
+document.addEventListener('keydown', (event) => {
+    if (!currentTetromino || isPaused) return;
+
+    switch (event.key) {
+        case 'ArrowLeft':
+            if (isValidMove(currentTetromino.shape, currentTetrominoPosition.x - 1, currentTetrominoPosition.y)) {
+                currentTetrominoPosition.x--;
+            }
+            break;
+        case 'ArrowRight':
+            if (isValidMove(currentTetromino.shape, currentTetrominoPosition.x + 1, currentTetrominoPosition.y)) {
+                currentTetrominoPosition.x++;
+            }
+            break;
+        case 'ArrowDown':
+            moveTetrominoDown();
+            break;
+        case ' ': // Spacebar for rotation
+            const rotatedShape = rotateTetromino(currentTetromino.shape);
+            if (isValidMove(rotatedShape, currentTetrominoPosition.x, currentTetrominoPosition.y)) {
+                currentTetromino.shape = rotatedShape;
+            }
+            break;
+    }
+});
+
+// Start button click handler
+startButton.addEventListener('click', () => {
+    initializeBoard();
+    spawnTetromino();
+    score = 0;
+    level = 1;
+    scoreElement.textContent = `Score: ${score}`;
+    levelElement.textContent = `Level: ${level}`;
+    clearInterval(gameInterval);
+    gameInterval = setInterval(gameLoop, 1000 / level);
+    isPaused = false;
+});
+
+// Pause button click handler
+pauseButton.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if(isPaused){
+      clearInterval(gameInterval);
+      pauseButton.textContent = "Resume";
+    } else {
+      gameInterval = setInterval(gameLoop, 1000 / level);
+      pauseButton.textContent = "Pause";
+    }
+
+});
+
+// Initialize the board (but don't start the game yet)
+initializeBoard();
+
+</script>
 </body>
 </html>
