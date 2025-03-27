@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>メモ - Apple風</title>
+  <title>URL表示アプリ</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f0f0f0;
-      color: #333;
     }
 
     .container {
@@ -18,8 +17,8 @@
       margin: 20px auto;
       padding: 20px;
       background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
@@ -27,63 +26,63 @@
       margin-bottom: 20px;
     }
 
-    textarea {
+    input[type="url"] {
       width: 100%;
-      height: 300px;
       padding: 10px;
+      margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 16px;
-      line-height: 1.5;
-      resize: vertical;
+      box-sizing: border-box; /* 幅の計算にpadding, borderを含める */
     }
 
     button {
-      background-color: #007aff;
+      background-color: #4CAF50;
       color: white;
       padding: 10px 20px;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
     }
 
     button:hover {
-      background-color: #0062cc;
+      background-color: #3e8e41;
     }
 
-    /* レスポンシブ */
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
     @media (max-width: 600px) {
       .container {
         margin: 10px;
         padding: 10px;
+      }
+
+      iframe {
+        height: 300px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>メモ</h1>
-    <textarea id="memoText" placeholder="ここにメモを入力してください"></textarea>
-    <button onclick="saveMemo()">保存</button>
+    <h1>URL表示アプリ</h1>
+    <input type="url" id="urlInput" placeholder="URLを入力してください">
+    <button onclick="displayURL()">表示</button>
+    <iframe id="urlFrame" src=""></iframe>
   </div>
 
   <script>
-    function saveMemo() {
-      const memoText = document.getElementById("memoText").value;
-      localStorage.setItem("memo", memoText);
-      alert("メモを保存しました!");
-    }
-
-    // ページ読み込み時に保存されたメモをロード
-    window.onload = function() {
-      const savedMemo = localStorage.getItem("memo");
-      if (savedMemo) {
-        document.getElementById("memoText").value = savedMemo;
+    function displayURL() {
+      const url = document.getElementById("urlInput").value;
+      if (url) {
+        document.getElementById("urlFrame").src = url;
+      } else {
+        alert("URLを入力してください。");
       }
-    };
+    }
   </script>
 </body>
 </html>
