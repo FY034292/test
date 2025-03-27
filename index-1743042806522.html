@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シューティングゲーム</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    #game-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    #canvas {
+      background-color: black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid white;
+    }
+
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+    }
+
+    #game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      display: none;
+    }
+
+    #restart-button {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      #score {
+        font-size: 16px;
+      }
+
+      #game-over {
+        font-size: 30px;
+      }
+
+      #restart-button {
+        font-size: 16px;
+      }
+    }
+  </style>
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+<body>
+<!-- このページは 2025-03-27T02:33:26.522Z に生成されました。表示時刻と異なる場合はキャッシュされています。 -->
+
+  <div id="game-container">
+    <canvas id="canvas"></canvas>
+    <div id="score">スコア: 0</div>
+    <div id="game-over">ゲームオーバー</div>
+    <button id="restart-button">再開</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const scoreElement = document.getElementById('score');
+    const gameOverElement = document.getElementById('game-over');
+    const restartButton = document.getElementById('restart-button');
+
+    let score = 0;
+    let gameRunning = true;
+
+    // Canvasのサイズを調整
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * 0.8;
+      canvas.height = window.innerHeight * 0.8;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // プレイヤー
+    const player = {
+      x: canvas.width / 2,
+      y: canvas.height - 50,
+      width: 30,
+      height: 30,
+      speed: 5,
+      color: 'green'
+    };
+
+    // 弾
+    const bullets = [];
+
+    function createBullet() {
+      bullets.push({
+        x: player.x,
+        y: player.y - player.height / 2,
+        width: 5,
+        height: 10,
+        speed: 7,
+        color: 'white'
+      });
+    }
+
+    // 敵
+    const enemies = [];
+
+    function createEnemy() {
+      enemies.push({
+        x: Math.random() * (canvas.width - 30),
+        y: 0,
+        width: 30,
+        height: 30,
+        speed: 2,
+        color: 'red'
+      });
+    }
+
+    // 敵の生成間隔
+    let enemyInterval = 1000;
+    let lastEnemyTime = 0;
+
+    // キー入力
+    const keys = {};
+
+    document.addEventListener('keydown', (e) => {
+      keys[e.key] = true;
+      if (e.key === ' ') {
+        createBullet();
+      }
+    });
+
+    document.addEventListener('keyup', (e) => {
+      keys[e.key] = false;
+    });
+
+    // ゲームループ
+    function gameLoop() {
+      if (!gameRunning) return;
+
+      // フレームごとに画面をクリア
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // プレイヤーの移動
+      if (keys['ArrowLeft'] && player.x > 0) {
+        player.x -= player.speed;
+      }
+      if (keys['ArrowRight'] && player.x < canvas.width - player.width) {
+        player.x += player.speed;
+      }
+
+      // 弾の更新
+      for (let i = 0; i < bullets.length; i++) {
+        bullets[i].y -= bullets[i].speed;
+
+        // 弾が画面外に出たら削除
+        if (bullets[i].y < 0) {
+          bullets.splice(i, 1);
+          i--;
+        }
+      }
+
+      // 敵の生成
+      if (Date.now() - lastEnemyTime > enemyInterval) {
+        createEnemy();
+        lastEnemyTime = Date.now();
+      }
+
+      // 敵の更新
+      for (let i = 0; i < enemies.length; i++) {
+        enemies[i].y += enemies[i].speed;
+
+        // 敵が画面外に出たら削除
+        if (enemies[i].y > canvas.height) {
+          enemies.splice(i, 1);
+          i--;
+        }
+      }
+
+      // 衝突判定（弾と敵）
+      for (let i = 0; i < bullets.length; i++) {
+        for (let j = 0; j < enemies.length; j++) {
+          if (
+            bullets[i].x < enemies[j].x + enemies[j].width &&
+            bullets[i].x + bullets[i].width > enemies[j].x &&
+            bullets[i].y < enemies[j].y + enemies[j].height &&
+            bullets[i].y + bullets[i].height > enemies[j].y
+          ) {
+            // 衝突！
+            bullets.splice(i, 1);
+            enemies.splice(j, 1);
+            i--;
+            j--;
+            score += 10;
+            scoreElement.textContent = 'スコア: ' + score;
+            break; // 同じ弾が複数の敵に当たらないように
+          }
+        }
+      }
+
+      // 衝突判定（プレイヤーと敵）
+      for (let i = 0; i < enemies.length; i++) {
+        if (
+          player.x < enemies[i].x + enemies[i].width &&
+          player.x + player.width > enemies[i].x &&
+          player.y < enemies[i].y + enemies[i].height &&
+          player.y + player.height > enemies[i].y
+        ) {
+          // ゲームオーバー
+          gameRunning = false;
+          gameOverElement.style.display = 'block';
+          restartButton.style.display = 'block';
+          break;
+        }
+      }
+
+      // 描画
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      bullets.forEach(bullet => {
+        ctx.fillStyle = bullet.color;
+        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+      });
+
+      enemies.forEach(enemy => {
+        ctx.fillStyle = enemy.color;
+        ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+      });
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    // 再開ボタン
+    restartButton.addEventListener('click', () => {
+      score = 0;
+      scoreElement.textContent = 'スコア: ' + score;
+      gameOverElement.style.display = 'none';
+      restartButton.style.display = 'none';
+      enemies.length = 0;
+      bullets.length = 0;
+      player.x = canvas.width / 2;
+      gameRunning = true;
+      gameLoop();
+    });
+
+    gameLoop();
+  </script>
+</body>
+</html>
