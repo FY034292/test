@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>不動産ランディングページ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* ヘッダー */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* メインコンテンツ */
+    main {
+      padding: 20px;
+    }
+
+    /* セクション */
+    section {
+      margin-bottom: 30px;
+    }
+
+    /* 見出し */
+    h2 {
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    /* 画像 */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* フォーム */
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    form button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    form button:hover {
+      background-color: #3e8e41;
+    }
+
+    /* フッター */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px;
+      }
+      main {
+        padding: 10px;
+      }
+      form {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>夢のマイホームを探しませんか？</h1>
+    <p>理想の住まいがきっと見つかる！</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>おすすめ物件</h2>
+      <img src="https://via.placeholder.com/600x400" alt="物件画像">
+      <p>快適な暮らしをサポートする最新の物件情報をお届けします。</p>
+    </section>
+
+    <section>
+      <h2>お問い合わせ</h2>
+      <form>
+        <label for="name">お名前:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">メールアドレス:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">お問い合わせ内容:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">送信</button>
+      </form>
+    </section>
+
+    <section>
+        <h2>選ばれる理由</h2>
+        <p>豊富な物件情報、親身なサポートで、お客様の理想の家探しを全力でサポートします。</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2023 不動産ランディングページ</p>
+  </footer>
+
+</body>
+</html>
