@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>最強の自分に出会う - [ジム名]</title>
+      <style>
+        body {
+          font-family: sans-serif;
+          margin: 0;
+          padding: 0;
+          line-height: 1.6;
+        }
+
+        header {
+          background-color: #f8f8f8;
+          padding: 20px;
+          text-align: center;
+        }
+
+        header h1 {
+          margin: 0;
+        }
+
+        /*ヒーローセクション*/
+        .hero {
+          background-color: #ddd; /*プレースホルダー*/
+          padding: 50px 20px;
+          text-align: center;
+          position: relative;
+        }
+
+        .hero img {
+          width: 100%;
+          max-width: 1200px;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+        }
+
+        /*特徴セクション*/
+        .features {
+          padding: 50px 20px;
+          text-align: center;
+        }
+
+        .features h2 {
+          margin-bottom: 30px;
+        }
+
+        .feature-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+        }
+
+        .feature {
+          padding: 20px;
+          border: 1px solid #eee;
+          text-align: left;
+        }
+
+        /*ソーシャルプルーフセクション*/
+        .testimonials {
+          background-color: #f0f0f0;
+          padding: 50px 20px;
+          text-align: center;
+        }
+
+        .testimonial-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+        }
+
+        .testimonial {
+          padding: 20px;
+          border: 1px solid #ddd;
+          font-style: italic;
+        }
+
+        /*FAQセクション*/
+        .faq {
+          padding: 50px 20px;
+          text-align: center;
+        }
+
+        .faq h2 {
+          margin-bottom: 30px;
+        }
+
+        .faq-item {
+          margin-bottom: 20px;
+          text-align: left;
+        }
+
+        .faq-item h3 {
+          margin-bottom: 5px;
+        }
+
+        /*お問い合わせフォームセクション*/
+        .contact {
+          background-color: #eee;
+          padding: 50px 20px;
+          text-align: center;
+        }
+
+        .contact h2 {
+          margin-bottom: 30px;
+        }
+
+        .contact form {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .contact form label {
+          display: block;
+          margin-bottom: 5px;
+          text-align: left;
+        }
+
+        .contact form input,
+        .contact form textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid #ccc;
+        }
+
+        .contact form button {
+          background-color: #007bff;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+        }
+
+        /*フッター*/
+        footer {
+          background-color: #333;
+          color: white;
+          padding: 20px;
+          text-align: center;
+        }
+
+        footer a {
+          color: white;
+          margin: 0 10px;
+          text-decoration: none;
+        }
+
+        /*レスポンシブデザイン*/
+        @media (max-width: 768px) {
+          .feature-grid,
+          .testimonial-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      </style>
+    </head>
+    <body>
+
+      <header>
+        <h1>[ジム名] - 最強の自分に出会う場所</h1>
+      </header>
+
+      <section class="hero">
+        <img src="https://drive.google.com/thumbnail?id=1Yd9khTqjzd-SgvuB6ZyT8LWnVYYCMvT5&sz=w1000" alt="ジムのイメージ">
+      </section>
+
+      <section class="features">
+        <h2>選ばれる理由</h2>
+        <div class="feature-grid">
+          <div class="feature">
+            <h3>最新の設備</h3>
+            <p>最新鋭のマシンを導入し、効果的なトレーニングをサポートします。</p>
+          </div>
+          <div class="feature">
+            <h3>経験豊富なトレーナー</h3>
+            <p>お客様一人ひとりに合わせた最適なトレーニングプランをご提案します。</p>
+          </div>
+          <div class="feature">
+            <h3>充実したプログラム</h3>
+            <p>筋力トレーニングからヨガ、格闘技まで、多彩なプログラムをご用意しています。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <h2>お客様の声</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <p>"トレーナーの指導が丁寧で、無理なく続けられています。目標達成までサポートしてくれるのが心強いです！"</p>
+            <p>- 田中さん</p>
+          </div>
+          <div class="testimonial">
+            <p>"設備が充実していて、飽きずにトレーニングできます。運動不足解消にも最適です！"</p>
+            <p>- 佐藤さん</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>よくある質問</h2>
+        <div class="faq-item">
+          <h3>Q: 入会金はかかりますか？</h3>
+          <p>A: はい、入会金として〇〇円を頂戴しております。現在キャンペーン中につき、入会金無料の特典をご利用いただけます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: トレーニングウェアは必要ですか？</h3>
+          <p>A: 動きやすい服装であれば特に指定はございません。レンタルウェアもご用意しております。</p>
+        </div>
+      </section>
+
+      <section class="contact">
+        <h2>お問い合わせ</h2>
+        <form>
+          <label for="name">お名前:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">メールアドレス:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">お問い合わせ内容:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit">送信</button>
+        </form>
+      </section>
+
+      <footer>
+        <p>&copy; 2023 [ジム名]</p>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+      </footer>
+
+    </body>
